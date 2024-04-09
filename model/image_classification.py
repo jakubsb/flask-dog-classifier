@@ -23,8 +23,8 @@ def preprocess_image(image_path, device=torch.device("cpu")):
 
 def predict_class(input_tensor, device=torch.device("cpu")):
     class_names = load_labels()
-    
     model = load_model()
+
     model.eval()
 
     with torch.no_grad():
@@ -40,7 +40,6 @@ def predict_class(input_tensor, device=torch.device("cpu")):
     return predicted_class, p.item()
 
 def load_labels():
-    
     with open(os.path.join(ROOT_DIR, 'labels/labels.txt'), 'r') as f:
         breeds = f.read()
         labels = breeds.split('\n')
@@ -65,7 +64,6 @@ def load_model():
 
     checkpoint = torch.load(os.path.join(ROOT_DIR, 'model/model_dict.pth'), map_location='cpu')
     model.load_state_dict(checkpoint)
-
     model.to(device)
 
     return model
