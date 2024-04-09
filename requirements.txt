@@ -1,0 +1,6 @@
+flask
+numpy
+Pillow
+#torch==1.9.0+cpu --install-option='-f https://download.pytorch.org/whl/torch_stable.html'
+#torchvision==0.10.0+cpu --install-option='-f https://download.pytorch.org/whl/torch_stable.html'
+#torchaudio==0.9.0 --install-option='-f https://download.pytorch.org/whl/torch_stable.html'
