@@ -41,7 +41,7 @@ def predict_class(input_tensor, device=torch.device("cpu")):
 
 def load_labels():
     
-    with open(os.path.join(ROOT_DIR, 'labels\labels.txt'), 'r') as f:
+    with open(os.path.join(ROOT_DIR, 'labels/labels.txt'), 'r') as f:
         breeds = f.read()
         labels = breeds.split('\n')
 
