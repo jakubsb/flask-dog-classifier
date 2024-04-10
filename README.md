@@ -14,7 +14,7 @@ The following repository contains a containerized web application with Docker fo
 - **templates**, **static**: static folder contains assets used by templates to build a web app UI
 
 ## Getting started
-1. Ensure you have Docker installed on your machine.
+1. Ensure you have Docker Desktop installed on your machine and open it.
 2. Clone this repository.
 3. Navigate to the repository directory.
 4. Run `docker build --tag=flask_dog_classification .`. 
