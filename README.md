@@ -17,8 +17,8 @@ The following repository contains a containerized web application with Docker fo
 1. Ensure you have Docker installed on your machine.
 2. Clone this repository.
 3. Navigate to the repository directory.
-4. Run **docker build --tag=flask_dog_classification .**. 
-5. Run **docker run -d -p 8000:8000 flask_dog_classification**.
-6. Navigate to **localhost:800** on your web browser.
+4. Run `docker build --tag=flask_dog_classification .`. 
+5. Run `docker run -d -p 8000:8000 flask_dog_classification`.
+6. Navigate to `localhost:800` on your web browser.
 
 
