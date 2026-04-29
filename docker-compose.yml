@@ -1,0 +1,16 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: dog-classifier-backend
+    expose:
+      - "8000"
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: dog-classifier-frontend
+    depends_on:
+      - backend
+    ports:
+      - "8000:80"
