@@ -1,30 +1,44 @@
-# Flask app for image classification
+# Dog Breed Classifier
 
-The following repository contains a containerized web application with Docker for identifying a dog breed from an input picture.
+This repository contains a two-container Docker application for dog breed prediction:
 
-## Repository structure
+- `frontend`: Nginx serving static UI files
+- `backend`: Flask REST API running with Gunicorn
 
-- **model/image_classification.py**: contains functions for processing and labeling the input image
-- **model/model_dict.pth**: serialized state dictionary of trained model
-- **app.py**: structure for a flask app
-- **Dockerfile**: allows to build an image containing code and necessary libraries
-- **labels/labels.txt**: contains all labels used for prediciton
-- **definitions.py** contains variable **ROOT_DIR** for root directory of this project
-- **requirements.txt**: required libraries (other than pytorch libraries)
-- **templates**, **static**: static folder contains assets used by templates to build a web app UI
+## Project structure
 
-## Getting started
-1. Ensure you have Docker Desktop installed on your machine and open it.
-2. Clone this repository.
-3. Navigate to the repository directory.
-4. Run: 
-    ```bash
-    docker build --tag=flask_dog_classification .
-    ```
-5. Run: 
-    ```bash
-    docker run -d -p 8000:8000 flask_dog_classification
-    ```
-6. Navigate to `localhost:8000` on your web browser.
+- `backend/app.py` - Flask API routes (`/api/v1/predict`)
+- `backend/model/image_classification.py` - image preprocessing and model inference
+- `backend/model/model_dict.pth` - trained model weights
+- `backend/labels/labels.txt` - class labels used by the model
+- `backend/Dockerfile` - backend container build/runtime configuration
+- `backend/requirements.txt` - backend Python dependencies
+- `frontend/templates/index.html` - static frontend page
+- `frontend/static/` - frontend CSS and JavaScript assets
+- `frontend/nginx/default.conf` - Nginx static/proxy configuration
+- `frontend/Dockerfile` - frontend container build configuration
+- `docker-compose.yml` - service orchestration
+
+## Requirements
+
+- Docker Desktop (running)
+
+## Run the application
+
+1. Clone the repository.
+2. Open a terminal in the project root.
+3. Build and start both containers:
+
+```bash
+docker compose up --build
+```
+
+4. Open the app at [http://localhost:8000](http://localhost:8000).
+
+## Stop containers
+
+```bash
+docker compose down
+```
 
 
