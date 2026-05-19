@@ -33,6 +33,22 @@ function showFileName( event ) {
 }
 
 /*  ==========================================
+    FORMATTING HELPER
+* ========================================== */
+
+function formatBreedName(breed) {
+    return breed
+        .replace(/_/g, ' ')
+        .trim()
+        .split(/\s+/)
+        .map(function (word) {
+            if (!word) return '';
+            return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+        })
+        .join(' ');
+}
+
+/*  ==========================================
     CALL REST API AND RENDER RESULT
 * ========================================== */
 var predictForm = document.getElementById('predict-form');
@@ -59,13 +75,16 @@ if (predictForm) {
             });
 
             var data = await response.json();
-
+            
             if (!response.ok) {
                 predictionResult.textContent = 'Error: ' + (data.error || 'prediction failed');
                 return;
             }
 
-            predictionResult.textContent = 'Breed: ' + data.breed + ' (confidence: ' + data.confidence + ')';
+            var pct = (data.confidence * 100).toFixed(1);
+            var formattedBreed = formatBreedName(data.breed);
+
+            predictionResult.textContent = 'Breed: ' + formattedBreed + ' (confidence: ' + pct + '%)';
         } catch (error) {
             predictionResult.textContent = 'Request failed. Please try again.';
         }
