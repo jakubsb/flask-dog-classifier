@@ -2,7 +2,7 @@ import torch
 from torch.nn.functional import softmax
 import torch.nn as nn
 from torchvision.transforms import transforms
-from torchvision.models import resnet34, ResNet34_Weights
+from torchvision.models import resnet34
 from PIL import Image
 import os
 from definitions import ROOT_DIR
@@ -50,7 +50,7 @@ def load_model():
     class CustomClassifier(nn.Module):
         def __init__(self, num_classes):
             super(CustomClassifier, self).__init__()
-            self.resnet = resnet34(weights=ResNet34_Weights.IMAGENET1K_V1)
+            self.resnet = resnet34()
             num_features = self.resnet.fc.in_features
             self.resnet.fc = nn.Linear(num_features, num_classes)
 
