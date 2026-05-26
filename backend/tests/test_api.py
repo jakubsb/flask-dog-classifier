@@ -1,11 +1,3 @@
-import pytest
-from app import app
-
-@pytest.fixture
-def client():
-    with app.test_client() as client:
-        yield client
-
 def test_health_returns_ok(client):
     response = client.get("/api/v1/health")
 
