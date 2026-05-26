@@ -3,6 +3,11 @@ from model.image_classification import preprocess_image, predict_class
 
 app = Flask(__name__)
 
+
+@app.route('/api/v1/health', methods=['GET'])
+def health_api():
+    return jsonify({"status": "ok"}), 200
+
 @app.route('/api/v1/predict', methods=['POST'])
 def predict_api():
     try:
