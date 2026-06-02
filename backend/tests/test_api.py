@@ -41,3 +41,20 @@ def test_predict_returns_500_on_inference_failure(client, monkeypatch, valid_ima
 
     assert response.status_code == 500
     assert response.get_json() == {"error": "inference failed"}
+
+
+def test_predict_returns_400_for_unsupported_file_type(client, invalid_file_type):
+    from app import UNSUPPORTED_FILE_TYPE_ERROR
+
+    response = client.post(
+        "/api/v1/predict",
+        data={"file": invalid_file_type},
+        content_type="multipart/form-data",
+    )
+
+    payload = response.get_json()
+
+    assert response.status_code == 400
+    assert payload == {"error": UNSUPPORTED_FILE_TYPE_ERROR}
+    assert "breed" not in payload
+    assert "confidence" not in payload

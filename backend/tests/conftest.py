@@ -14,12 +14,27 @@ def client():
         yield client
 
 
-@pytest.fixture
-def valid_image_file():
+@pytest.fixture(params=["PNG", "JPEG", "WEBP"])
+def valid_image_file(request):
     img = Image.new("RGB", (100, 100), color="black")
-    img_byte_arr = io.BytesIO()
-    img.save(img_byte_arr, format="PNG")
-    img_byte_arr.seek(0)
-    img_byte_arr.name = "test_image.png"
-    
-    return img_byte_arr
+    buf = io.BytesIO()
+    img.save(buf, format=request.param)
+    buf.seek(0)
+    buf.name = f"test_image.{request.param.lower()}"
+    return buf
+
+
+INVALID_FILE_CASES = [
+    ("document.pdf", b"%PDF-1.4\n%%EOF\n"),
+    ("program.exe", b"MZ\x90\x00"),
+    ("animation.gif", b"GIF89a"),
+    ("upload", b"binary-content"),
+]
+
+
+@pytest.fixture(params=INVALID_FILE_CASES, ids=["pdf", "exe", "gif", "no_extension"])
+def invalid_file_type(request):
+    filename, content = request.param
+    buf = io.BytesIO(content)
+    buf.name = filename
+    return buf
