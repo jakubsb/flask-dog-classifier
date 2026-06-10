@@ -1,6 +1,6 @@
 # Dog Breed Classifier
 
-This repository contains a two-container Docker application for dog breed prediction:
+A self-contained application for predicting a dog breed from an image. Runs entirely on Docker using two containers:
 
 - `frontend`: Nginx serving static UI files
 - `backend`: Flask REST API running with Gunicorn
@@ -10,6 +10,7 @@ This repository contains a two-container Docker application for dog breed predic
 - `backend/app.py` - Flask API routes (`/api/v1/predict`)
 - `backend/model/image_classification.py` - image preprocessing and model inference
 - `backend/model/model_dict.pth` - trained model weights
+- `backend/tests` - API and app tests
 - `backend/labels/labels.txt` - class labels used by the model
 - `backend/Dockerfile` - backend container build/runtime configuration
 - `backend/requirements.txt` - backend Python dependencies
@@ -30,7 +31,7 @@ This repository contains a two-container Docker application for dog breed predic
 3. Build and start both containers:
 
 ```bash
-docker compose up --build
+docker compose up -d
 ```
 
 4. Open the app at [http://localhost:8000](http://localhost:8000).
@@ -40,5 +41,4 @@ docker compose up --build
 ```bash
 docker compose down
 ```
-
 
